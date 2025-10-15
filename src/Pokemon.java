@@ -26,38 +26,42 @@ public class Pokemon {
         System.out.println("\n");
         System.out.println("¡Comienza la batalla entre: " + pokemon1 + " y " + pokemon2 + "!");
 
-        boolean turnoRaichu = false;
-        boolean turnoBulbassaur = true;
+        boolean turnoRaichu = true;
+        boolean turnoBulbassaur = false;
+        Scanner sc = new Scanner(System.in);
 
 
         while (vida1 > 0 && vida2 > 0) {
-            if (turnoRaichu == true) {
+            if (turnoRaichu == true){
                 System.out.println("\nEs el turno de Raichu! ");
                 System.out.println("\nEscoge qué ataque quieres hacer: ");
                 System.out.println(" 1) Ataque normal ");
                 System.out.println(" 2) Ataque especial ");
-                Scanner sc = new Scanner(System.in);
                 int opcion = sc.nextInt();
 
                 if (opcion == 1) {
                     int danhototal = dmg1 - defensa2;
                     vida2 -= danhototal;
-                    System.out.println(pokemon1 + " Utiliza rayo contra Bulbassaur ");
+                    System.out.println(pokemon1 + " Utiliza rayo contra " + pokemon2);
                 } else if (opcion == 2) {
-                    int danhototal = dmgatqespc - defensa2;
-                    vida2 -= danhototal;
-                    MP1 -= consumoatqespc;
-                    System.out.println(pokemon1 + " Utiliza Castigo Eléctrico contra Bulbassaur ");
+                    if(MP1 >= consumoatqespc) {
+                        int danhototal = dmgatqespc - defensa2;
+                        vida2 -= danhototal;
+                        MP1 -= consumoatqespc;
+                        System.out.println(pokemon1 + " Utiliza " + atqespecial);
+                    }else if (MP1 <= consumoatqespc) {
+                        System.out.println("No tienes suficientes Magic Points! ");
+                    }
                 }
             }
             turnoRaichu = !turnoRaichu;
             {
                 if (turnoBulbassaur == true) {
-                    System.out.println(" Es el turno de Bulbassaur ");
+                    System.out.println(" Es el turno de Bulbassaur! ");
                     System.out.println("\nEscoge el ataque: ");
                     System.out.println(" 1) Ataque normal ");
                     System.out.println(" 2) Ataque especial ");
-                    Scanner sc = new Scanner(System.in);
+                    Scanner sc1 = new Scanner(System.in);
                     int opcion2 = sc.nextInt();
 
                     if (opcion2 == 1) {
@@ -65,16 +69,28 @@ public class Pokemon {
                         vida1 -= danhototal;
                         System.out.println(pokemon2 + " Utiliza Látigo contra Raichu ");
                     } else if (opcion2 == 2) {
-                        int danhototal = dmgatqespc2 - defensa1;
-                        vida1 -= danhototal;
-                        MP2 -= consumoatqespc2;
-                        System.out.println(pokemon2 + " Utiliza Madre Naturaleza contra Raichu ");
+                        if(MP2 >= consumoatqespc) {
+                            int danhototal = dmgatqespc2 - defensa1;
+                            vida1 -= danhototal;
+                            MP2 -= consumoatqespc2;
+                            System.out.println(pokemon2 + " Utiliza Madre Naturaleza contra Raichu ");
+                        }else if (MP2 <= consumoatqespc2) {
+                            System.out.println(" No tienes suficientes Magic Points!");
+
+                        }
                     }
                 }
-            }
-
+            }turnoBulbassaur = !turnoBulbassaur;
 
         }
+        System.out.println("\nBatalla terminada");
+        if(vida1 <= 0){
+            System.out.println(pokemon2 + " ha ganado la batalla ");
+        } else if (vida2 <= 0) {
+            System.out.println(pokemon1 + " ha ganado la batalla ");
+        }
+
+
     }
 }
 
