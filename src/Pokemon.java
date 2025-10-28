@@ -1,6 +1,34 @@
 import java.util.Scanner;
 
 public class Pokemon {
+
+    public static String estadopok1(){
+        int vida = 150;
+        int MP = 70;
+        int defensa = 10;
+        String estado = "La vida es: " + vida + "El MP es: " + MP + "La defensa es: " + defensa;
+        return estado;
+    }
+
+    public static int queataque(){
+        Scanner sc = new Scanner(System.in);
+        int ataque;
+        ataque = sc.nextInt();
+        while(ataque != 1 && ataque != 2){
+            System.out.println("\nEso no es correcto, porfavor, introduce el ataque 1 o 2");
+            ataque = sc.nextInt();
+            System.out.println("\nHas escogido el ataque: " + ataque);
+        }return ataque;
+        }
+
+    public static int dmgatq(){
+        int dmg = 35;
+        int vidaenemy = 135;
+        int defenemy = 10;
+        int vidarest = (dmg - defenemy) - vidaenemy;
+        return vidarest;
+    }
+
     public static void main(String[] args) {
 
         String pokemon1 = "Raichu";
@@ -76,7 +104,6 @@ public class Pokemon {
                             System.out.println(pokemon2 + " Utiliza Madre Naturaleza contra Raichu ");
                         }else if (MP2 <= consumoatqespc2) {
                             System.out.println(" No tienes suficientes Magic Points!");
-
                         }
                     }
                 }
@@ -89,8 +116,6 @@ public class Pokemon {
         } else if (vida2 <= 0) {
             System.out.println(pokemon1 + " ha ganado la batalla ");
         }
-
-
     }
 }
 
